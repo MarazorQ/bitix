@@ -28,8 +28,8 @@
     <div class="wrap">
 	  <div class="header-top-left">
 			<div class="logo">
-			     <a href="index.html"><h1>SHARE</h1>
-			     	<h2>The Blog</h2>
+			     <a href="index.html"><h1>Egor</h1>
+			     	<h2>Loh</h2>
 			     </a>
 			</div>
 		<?$APPLICATION->IncludeComponent("bitrix:menu", "menu", Array(
