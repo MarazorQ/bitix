@@ -8,6 +8,8 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 $APPLICATION->SetTitle("404 Not Found");
 
+echo ERROR_404;
+
 $APPLICATION->IncludeComponent("bitrix:main.map", ".default", Array(
 	"LEVEL"	=>	"3",
 	"COL_NUM"	=>	"2",
