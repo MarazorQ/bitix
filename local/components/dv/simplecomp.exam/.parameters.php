@@ -8,7 +8,7 @@
 		 "PARAMETERS" => array(
 		 	"CATALOG_IBLOCK_ID" => array(
 			"PARENT" => "BASE",
-			"NAME" => "ID инфоблока с каталогом товаров",
+			"NAME" => GetMessage("T_IBLOCK_CATALOG_ID"),
 			"TYPE" => "STRING",
 			"MULTIPLE" => "N",
 			"DEFAULT" => "",
@@ -16,7 +16,7 @@
 
 		 	"NEWS_IBLOCK_ID" => array(
 			"PARENT" => "BASE",
-			"NAME" => "ID инфоблока с новостями",
+			"NAME" => GetMessage("T_IBLOCK_NEWS_ID"),
 			"TYPE" => "STRING",
 			"MULTIPLE" => "N",
 			"DEFAULT" => "",
@@ -24,7 +24,7 @@
 
 			"CODE_USER" => array(
 			"PARENT" => "BASE",
-			"NAME" => "Код пользовательского свойства разделов каталога, в котором хранится привязка к новостям",
+			"NAME" => GetMessage("T_IBLOCK_CODE_USER"),
 			"TYPE" => "STRING",
 			"MULTIPLE" => "N",
 			"DEFAULT" => "",
