@@ -1,10 +1,12 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die(); 
 
 	$arComponentDescription = array(
-    "NAME" => GetMessage("Каталог товаров"),
+    "NAME" => "Каталог товаров",
     "DESCRIPTION" => GetMessage("Каталог товаров с новостями"),
-    "ICON" => "images/icon.gif",
+    "ICON" => "/images/icon.gif",
+    "PATH" => array(
+        "ID" => "dv_components",
+        "NAME" => "Мои компоненты",
+    )
     );
-
-
 ?>
