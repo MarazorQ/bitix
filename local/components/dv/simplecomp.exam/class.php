@@ -26,7 +26,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 		{
 			if (!Loader::includeModule('iblock')) 
 			{
-				throw new \Exception('Не загружены модули необходимые для работы модуля');
+				throw new \Exception(GetMessage('CLASS_ERROR_MESAGE'));
 			}
 
 			return true;
