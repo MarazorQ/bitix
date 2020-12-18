@@ -22,7 +22,7 @@
 			"DEFAULT" => "",
 			),
 
-			"CODE_USER" => array(
+			"UF_NEWS_LINK_ID" => array(
 			"PARENT" => "BASE",
 			"NAME" => GetMessage("T_IBLOCK_CODE_USER"),
 			"TYPE" => "STRING",
