@@ -14,17 +14,25 @@
 			"DEFAULT" => "",
 		 	),
 
-		 	"NEWS_IBLOCK_ID" => array(
+		 	"SIZER_IBLOCK_ID" => array(
 			"PARENT" => "BASE",
-			"NAME" => GetMessage("T_IBLOCK_NEWS_ID"),
+			"NAME" => GetMessage("T_IBLOCK_SIZER_ID"),
 			"TYPE" => "STRING",
 			"MULTIPLE" => "N",
 			"DEFAULT" => "",
 			),
 
-			"UF_NEWS_LINK_ID" => array(
+			"DETAIL_PRODUCT_URL" => array(
 			"PARENT" => "BASE",
-			"NAME" => GetMessage("T_IBLOCK_CODE_USER"),
+			"NAME" => GetMessage("T_IBLOCK_DETAIL_PRODUCT_URL"),
+			"TYPE" => "STRING",
+			"MULTIPLE" => "N",
+			"DEFAULT" => "",
+			),
+
+			"PRODUCT_PROPERTY_CODE" => array(
+			"PARENT" => "BASE",
+			"NAME" => GetMessage("T_IBLOCK_PRODUCT_PROPERTY_CODE"),
 			"TYPE" => "STRING",
 			"MULTIPLE" => "N",
 			"DEFAULT" => "",
