@@ -1,8 +1,8 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 	<div>
-		<h3> Элементов: <?=$arResult['COUNT_ELEMS'];?></h3>
+		<h3> Разделов: <?=$arResult['COUNT_ELEMS'];?></h3>
 	    <ul>
-	    <?php foreach ($arResult as $key => $news):?>
+	    <?php foreach ($arResult as $sizer):?>
 
 	        <?php if ($key == 'COUNT_ELEMS'):?>
 	            <?php continue;?>

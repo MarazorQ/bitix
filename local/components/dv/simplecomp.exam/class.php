@@ -76,9 +76,10 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
             {
                 $arSizerID[] =  $sizerData['ID'];
                 $result[$sizerData['ID']] = [$sizerData['NAME'], 'ELEMS' => []];
+                $count++;
             }
             // количество разделов 
-            $countElems = count($arSizerId);
+            $countElems = $count;
         
             $arFilterDir = ['IBLOCK_ID' => $this->arParams['CATALOG_IBLOCK_ID'],'PROPERTY_FIRM.ID' => $arSizerId,];
             $arSelectDir = ['IBLOCK_ID', 'ID', 'NAME', 'PROPERTY_FIRM', 'PROPERTY_PRICE', 'PROPERTY_MATERIAL', 'PROPERTY_ARTNUMBER', 'DETAIL_PAGE_URL'];
