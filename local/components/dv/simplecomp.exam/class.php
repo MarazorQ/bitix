@@ -53,60 +53,43 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 			return $APPLICATION;
 		}
 
+        private function _usser()
+        {
+            global $USER;
+            return $USER;
+        }
+
 		/*
 		 * Подготовка результатов компонента
 		 * @res $arResult
 		 * @return resault
 		 */
         public function prepareComponentResault() 
-        {
-            $arFilterNews = ['IBLOCK_ID' => $this->arParams['NEWS_IBLOCK_ID']];
-            $arSelectNews = ['IBLOCK_ID', 'ID', 'NAME', 'DATE_ACTIVE_FROM'];
-            $resNews = CIBlockElement::GetList([], $arFilterNews, false, false, $arSelectNews);
+        {   
+            // вытакскиваем классификатор
+
+            $arFilterSizer = ['IBLOCK_ID' => $this->arParams['SIZER_IBLOCK_ID']];
+            $arSelectSizer = ['IBLOCK_ID', 'ID', 'NAME'];
+            $resSizer = CIBlockElement::GetList([], $arFilterSizer, false, false, $arSelectSizer);
         
-            while ($newsData = $resNews->Fetch()) 
+            while ($sizerData = $resSizer->Fetch()) 
             {
-                $arNewsID[] =  $newsData['ID'];
-                $result[$newsData['ID']] = [
-                                        'NEWS_NAME' => $newsData['NAME'], 
-                                        'NEWS_DATE' => $newsData['DATE_ACTIVE_FROM'], 
-                                        'DIRECTORY' => [], 'ELEMS' => []
-                                            ];
+                $arSizerID[] =  $sizerData['ID'];
+                $result[$sizerData['ID']] = [$sizerData['NAME'], 'ELEMS' => []];
             }
+            // количество разделов 
+            $countElems = count($arSizerId);
         
-            $arFilterDir = ['IBLOCK_ID' => $this->arParams['CATALOG_IBLOCK_ID'], 'ACTIVE' => 'Y', 'UF_NEWS_LINK' => $arNewsID];
-            $arSelectDir = ['IBLOCK_ID', 'ID', 'NAME', 'UF_NEWS_LINK'];
+            $arFilterDir = ['IBLOCK_ID' => $this->arParams['CATALOG_IBLOCK_ID'],'PROPERTY_FIRM.ID' => $arSizerId,];
+            $arSelectDir = ['IBLOCK_ID', 'ID', 'NAME', 'PROPERTY_FIRM', 'PROPERTY_PRICE', 'PROPERTY_MATERIAL', 'PROPERTY_ARTNUMBER', 'DETAIL_PAGE_URL'];
             $resDir = CIBlockSection::GetList([], $arFilterDir, false, $arSelectDir);
 
-            while ($dirData = $resDir->Fetch()) 
-            {
-                $arDirID[] = $dirData['ID'];
-                    
-                foreach ($dirData['UF_NEWS_LINK'] as $newsLink) 
-                {
-                    $result[$newsLink]['DIRECTORY'][$dirData['ID']] = $dirData;
-                }
-            }
+            // расскидываем товары по классификаторам
+            while ($dirData = $resDir->GetNextElement()) 
+            {   
+                $arDir= $dirData->GetFields();
+                $result[$arDir['PROPERTY_FIRM_VALUE']]['ELEMS'][] = $arDir;
                 
-            $arFilterElem = ['IBLOCK_ID' => $this->arParams['CATALOG_IBLOCK_ID'], 'ACTIVE' => 'Y', 'SECTION_ID' => $arDirID];
-            $arSelectElem = ['IBLOCK_ID', 'ID', 'NAME', 'PROPERTY_PRICE', 'PROPERTY_MATERIAL', 'PROPERTY_ARTNUMBER', 'IBLOCK_SECTION_ID'];
-            $resElem = CIBlockElement::GetList([], $arFilterElem, false, false, $arSelectElem);
-                
-            $countElems = $resElem->SelectedRowsCount();//количество выбранных записей SELECT
-                
-            while ($elemData = $resElem->Fetch()) 
-            {
-                foreach ($result as $key => $news) 
-                {
-                    foreach ($news['DIRECTORY'] as $dir) 
-                    {
-                        if ($elemData['IBLOCK_SECTION_ID'] == $dir['ID']) 
-                        {
-                            $result[$key]['ELEMS'][] =  $elemData;
-                               
-                        }
-                    } 
-                }
             }
 
             $result['COUNT_ELEMS'] = $countElems;
@@ -124,12 +107,13 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
         	$this->_checkModules();
         	$this->_chache();
         	$ap = $this->_app();
+            $user = $this->_usser();
 
             if ($this->StartResultCache()) {
                 $this->arResult = $this->prepareComponentResault();
                 $this->SetResultCacheKeys(['COUNT_ELEMS']);
                 $this->IncludeComponentTemplate();
             }
-            $ap->SetTitle("В каталоге товаров представлено товаров:  ".$this->arResult['COUNT_ELEMS']);
+            $ap->SetTitle("Разделов- ".$this->arResult['COUNT_ELEMS']);
         } 
     }
